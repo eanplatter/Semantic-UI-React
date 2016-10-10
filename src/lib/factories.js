@@ -2,6 +2,18 @@ import _ from 'lodash'
 import cx from 'classnames'
 import React, { cloneElement, isValidElement } from 'react'
 
+// Simplified and faster version of:
+// http://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript-jquery
+const hashCode = function hashCode(str) {
+  const { length } = str
+  if (!str || length === 0) return 0
+  let hash = 0
+  for (let i = 0; i < length; i++) {
+    hash = hash * 31 + str.charCodeAt(i) | 0
+  }
+  return hash
+}
+
 /**
  * Merges props and classNames.
  *
@@ -16,8 +28,14 @@ const mergePropsAndClassName = (defaultProps, props) => {
     newProps.className = cx(defaultProps.className, props.className) // eslint-disable-line react/prop-types
   }
 
-  if (!newProps.key && childKey) {
-    newProps.key = _.isFunction(childKey) ? childKey(newProps) : childKey
+  if (!newProps.key) {
+    if (childKey) {
+      newProps.key = _.isFunction(childKey) ? childKey(newProps) : childKey
+    } else {
+      const stringified = _.map(newProps, (val, key) => `${key}:${val}`).join('')
+      console.log(stringified)
+      newProps.key = hashCode(stringified)
+    }
   }
 
   return newProps
@@ -56,6 +74,10 @@ export function createShorthand(Component, mapValueToProps, val, defaultProps = 
 
   defaultProps = _.isFunction(defaultProps) ? defaultProps(usersProps) : defaultProps
   const props = mergePropsAndClassName(defaultProps, usersProps)
+
+  if (Component._meta.name === 'TableCell') {
+    console.log(props)
+  }
 
   // Clone ReactElements
   if (type === 'element') {

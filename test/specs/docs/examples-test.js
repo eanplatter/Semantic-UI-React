@@ -12,6 +12,9 @@ describe.only('examples', () => {
     console.error.restore()
   })
   exampleContext.keys().forEach(path => {
+    if (!path.includes('TableWarningShorthand')) {
+      return
+    }
     it(`renders without errors: ${path}`, () => {
       mount(createElement(exampleContext(path).default))
 
