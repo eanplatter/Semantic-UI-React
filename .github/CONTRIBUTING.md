@@ -58,7 +58,7 @@ git clone git@github.com:<your-user>/Semantic-UI-React.git
 cd Semantic-UI-React
 npm install
 
-// or if you are using Yarn
+# Or if you are using Yarn
 yarn install
 ```
 
