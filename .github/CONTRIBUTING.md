@@ -57,6 +57,9 @@ Start by [forking stardust][12] to your GitHub account.  Then clone your fork an
 git clone git@github.com:<your-user>/Semantic-UI-React.git
 cd Semantic-UI-React
 npm install
+
+// or if you are using Yarn
+yarn install
 ```
 
 Add our repo as a git remote so you can pull/rebase your fork with our latest updates:

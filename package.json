@@ -37,8 +37,8 @@
     "test:watch": "npm run test --silent -- --watch"
   },
   "repository": {
-    "type": "git",
-    "url": "git+ssh://github.com/Semantic-Org/Semantic-UI-React.git"
+    "url": "git+ssh://github.com/Semantic-Org/Semantic-UI-React.git",
+    "type": "git"
   },
   "author": "Technology Advice <devteam@technologyadvice.com>",
   "license": "MIT",
